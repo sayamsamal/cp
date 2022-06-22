@@ -10,7 +10,9 @@
 				"-g",
 				"${file}",
 				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}"
+				"${fileDirname}/${fileBasenameNoExtension}",
+				"-D",
+				"CUSTOM_JUDGE",
 			],
 			"options": {
 				"cwd": "${fileDirname}"
