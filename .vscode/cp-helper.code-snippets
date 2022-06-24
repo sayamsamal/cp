@@ -25,10 +25,6 @@
 			"{",
 			"\tios_base::sync_with_stdio(false);",
 			"\tcin.tie(NULL);",
-			"\t#ifdef CUSTOM_JUDGE",
-			"\t\tfreopen(\"IO/input.txt\", \"r\", stdin);",
-			"\t\tfreopen(\"IO/output.txt\", \"w\", stdout);",
-			"\t#endif",
 			"\t$0",
 			"\treturn 0;",
 			"}"

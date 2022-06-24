@@ -4,5 +4,8 @@
     "workbench.editor.decorations.badges": true,
     "workbench.editor.highlightModifiedTabs": false,
     "workbench.editor.showIcons": true,
-    "workbench.editor.showTabs": false
+    "workbench.editor.showTabs": false,
+    "files.associations": {
+        "iostream": "cpp"
+    }
 }
