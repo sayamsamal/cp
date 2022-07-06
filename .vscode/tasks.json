@@ -3,14 +3,19 @@
 	"tasks": [
 		{
 			"type": "cppbuild",
-			"label": "Default Build",
+			"label": "Build: Default",
 			"command": "/usr/bin/g++",
 			"args": [
+				"-Wall",
+				"-Wextra",
+				"-pedantic",
+				"-std=c++17",
+				"-O2",
 				"-fdiagnostics-color=always",
 				"-g",
 				"${file}",
 				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}",
+				"${fileDirname}/${fileBasenameNoExtension}.out",
 			],
 			"options": {
 				"cwd": "${fileDirname}"
@@ -22,18 +27,75 @@
 				"kind": "build",
 				"isDefault": true
 			},
-			"detail": "compiler: /usr/bin/g++"
+			"detail": "compiler: /usr/bin/g++",
+			"presentation": {
+				"showReuseMessage": false,
+				"panel": "shared",
+				"clear": true,
+				"close": true,
+				"revealProblems": "onProblem",
+				"reveal": "silent"
+			}
 		},
 		{
 			"type": "cppbuild",
-			"label": "Custom Judge",
+			"label": "Build: All args",
+			"command": "/usr/bin/g++",
+			"args": [
+				"-Wall",
+				"-Wextra",
+				"-pedantic",
+				"-std=c++17",
+				"-O2",
+				"-Wshadow",
+				"-Wformat=2",
+				"-Wfloat-equal",
+				"-Wconversion",
+				"-Wlogical-op",
+				"-Wshift-overflow=2",
+				"-Wduplicated-cond",
+				"-Wcast-qual",
+				"-Wcast-align",
+				"-D_GLIBCXX_DEBUG",
+				"-D_GLIBCXX_DEBUG_PEDANTIC",
+				"-D_FORTIFY_SOURCE=2",
+				"-fsanitize=address",
+				"-fsanitize=undefined",
+				"-fno-sanitize-recover",
+				"-fstack-protector",
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}/${fileBasenameNoExtension}.out",
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+			},
+			"detail": "compiler: /usr/bin/g++",
+			"presentation": {
+				"showReuseMessage": false,
+				"panel": "shared",
+				"clear": true,
+				"close": true
+			}
+		},
+		{
+			"type": "cppbuild",
+			"label": "Build: Custom Judge",
 			"command": "/usr/bin/g++",
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
 				"${file}",
 				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}",
+				"${fileDirname}/${fileBasenameNoExtension}.out",
 				"-D",
 				"CUSTOM_JUDGE",
 			],
@@ -46,44 +108,20 @@
 			"group": {
 				"kind": "build"
 			},
-			"detail": "compiler: /usr/bin/g++"
-		},
-		{
-			"type": "shell",
-			"label": "Build and run",
-			"command": "/usr/bin/g++",
-			"args": [
-				"-fdiagnostics-color=always",
-				"-g",
-				"${file}",
-				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}",
-				"&&",
-				"${fileDirname}/${fileBasenameNoExtension}"
-			],
-			"options": {
-				"cwd": "${fileDirname}"
-			},
-			"problemMatcher": [
-				"$gcc"
-			],
-			"group": {
-				"kind": "test"
-			},
 			"detail": "compiler: /usr/bin/g++",
 			"presentation": {
 				"showReuseMessage": false,
 				"panel": "shared",
 				"clear": true,
-				"focus": true
+				"close": true
 			}
 		},
 		{
 			"type": "shell",
-			"label": "Run Compiled",
+			"label": "Run",
 			"command": "",
 			"args": [
-				"${fileDirname}/${fileBasenameNoExtension}"
+				"${fileDirname}/${fileBasenameNoExtension}.out"
 			],
 			"options": {
 				"cwd": "${fileDirname}"
@@ -94,7 +132,6 @@
 			"group": {
 				"kind": "test"
 			},
-			"detail": "compiler: /usr/bin/g++",
 			"presentation": {
 				"showReuseMessage": false,
 				"panel": "shared",
@@ -104,16 +141,10 @@
 		},
 		{
 			"type": "shell",
-			"label": "Build and run with i/o",
-			"command": "/usr/bin/g++",
+			"label": "Run with I/O",
+			"command": "",
 			"args": [
-				"-fdiagnostics-color=always",
-				"-g",
-				"${file}",
-				"-o",
-				"${fileDirname}/${fileBasenameNoExtension}",
-				"&&",
-				"${fileDirname}/${fileBasenameNoExtension}",
+				"${fileDirname}/${fileBasenameNoExtension}.out",
 				"<",
 				"${workspaceFolder}/IO/input.txt",
 				">",
@@ -122,19 +153,36 @@
 			"options": {
 				"cwd": "${fileDirname}"
 			},
-			"problemMatcher": [
-				"$gcc"
-			],
 			"group": {
 				"kind": "test"
 			},
-			"detail": "compiler: /usr/bin/g++",
 			"presentation": {
 				"showReuseMessage": false,
 				"panel": "shared",
 				"clear": true,
 				"focus": true,
 				"close": true
+			}
+		},
+		{
+			"label": "Build and run",
+			"dependsOrder": "sequence",
+			"dependsOn": ["Build: Default", "Run"],
+			"presentation": {
+				"showReuseMessage": false,
+				"panel": "shared",
+				"clear": true,
+			}
+		},
+		{
+			"label": "Build and Run with I/O",
+			"dependsOrder": "sequence",
+			"dependsOn": ["Build: Default", "Run with I/O"],
+			"presentation": {
+				"showReuseMessage": false,
+				"panel": "shared",
+				"clear": true,
+				"focus": true,
 			}
 		}
 	]

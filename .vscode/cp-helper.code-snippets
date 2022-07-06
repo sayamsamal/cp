@@ -15,20 +15,36 @@
 	// 	],
 	// 	"description": "Log output to console"
 	// }
-	"Print to console": {
+	"Default for CP": {
 		"scope": "cpp",
 		"prefix": "cp_default",
 		"body": [
 			"#include <bits/stdc++.h>",
-			"using namespace std;\n",
+			"using namespace std;",
+			"",
+			"void solve() {",
+			"    $0",
+			"}",
+			"",
 			"int main()",
 			"{",
-			"\tios_base::sync_with_stdio(false);",
-			"\tcin.tie(NULL);",
-			"\t$0",
-			"\treturn 0;",
+			"    ios_base::sync_with_stdio(false);",
+			"    cin.tie(NULL);",
+			"    solve();",
+			"    return 0;",
 			"}"
 		],
-		"description": "Log output to console"
+		"description": "CP Template"
+	},
+	"Array Input": {
+		"scope": "cpp",
+		"prefix": "s_farr",
+		"body": [
+			"for(int i=0; i<n; i++) {",
+			"    cin >> arr[i];",
+			"    $0",
+			"}"
+		],
+		"description": "Array input template"
 	}
 }
